@@ -1,0 +1,124 @@
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: PyDbLite 3.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-10-09 23:41+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/doccoverage.rst:2
+msgid "Documentation coverage"
+msgstr ""
+
+#~ msgid "Undocumented Python objects"
+#~ msgstr ""
+
+#~ msgid "pydblite.common"
+#~ msgstr ""
+
+#~ msgid "Functions:"
+#~ msgstr ""
+
+#~ msgid "enum"
+#~ msgstr ""
+
+#~ msgid "is_iterable_but_not_str"
+#~ msgstr ""
+
+#~ msgid "Classes:"
+#~ msgstr ""
+
+#~ msgid "Expression"
+#~ msgstr ""
+
+#~ msgid "ExpressionGroup"
+#~ msgstr ""
+
+#~ msgid "pydblite.pydblite"
+#~ msgstr ""
+
+#~ msgid "like"
+#~ msgstr ""
+
+#~ msgid "Base"
+#~ msgstr ""
+
+#~ msgid "Index -- missing methods:"
+#~ msgstr ""
+
+#~ msgid "keys"
+#~ msgstr ""
+
+#~ msgid "PyDbExpression"
+#~ msgstr ""
+
+#~ msgid "PyDbExpressionGroup"
+#~ msgstr ""
+
+#~ msgid "PyDbFilter"
+#~ msgstr ""
+
+#~ msgid "pydblite.sqlite"
+#~ msgstr ""
+
+#~ msgid "guess_default_fmt"
+#~ msgstr ""
+
+#~ msgid "to_date"
+#~ msgstr ""
+
+#~ msgid "to_datetime"
+#~ msgstr ""
+
+#~ msgid "to_str"
+#~ msgstr ""
+
+#~ msgid "to_time"
+#~ msgstr ""
+
+#~ msgid "CurrentDate"
+#~ msgstr ""
+
+#~ msgid "CurrentTime"
+#~ msgstr ""
+
+#~ msgid "CurrentTimestamp"
+#~ msgstr ""
+
+#~ msgid "Database -- missing methods:"
+#~ msgstr ""
+
+#~ msgid "create"
+#~ msgstr ""
+
+#~ msgid "Table -- missing methods:"
+#~ msgstr ""
+
+#~ msgid "create_index"
+#~ msgstr ""
+
+#~ msgid "delete_index"
+#~ msgstr ""
+
+#~ msgid "drop_field"
+#~ msgstr ""
+
+#~ msgid "filter"
+#~ msgstr ""
+
+#~ msgid "get_group_count"
+#~ msgstr ""
+
+#~ msgid "get_indices"
+#~ msgstr ""
+
+#~ msgid "get_unique_ids"
+#~ msgstr ""
+
+#~ msgid "info"
+#~ msgstr ""

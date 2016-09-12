@@ -1,0 +1,142 @@
+<html>
+
+<head>
+<title>PyDbLite</title>
+<link rel="stylesheet" href="../pydblite.css">
+</head>
+
+<body>
+
+<table width="100%" cellspacing="0" cellpadding="10">
+
+<tr>
+	<td class="navigation" align="center"><img src="../img/banniere.jpg"></td>
+	<td class="lnk" align="right"><a class="langue" href="../en/SQLite.html">English</a></td>
+</tr>
+
+</table>
+
+<table width="100%" cellspacing="0" cellpadding="0">
+<tr>
+	<td class="menu">
+	<div id="niveau1">Documentation</div>
+		<div id="niveau2">
+		<a href="index.html">Accueil</a>
+		<br><a href="PyDbLite.html">Moteur pur-Python</a>
+		<br><a href="SQLite.html">Adapteur SQLite </a>
+		<br><a href="MySQL.html">Adapteur MySQL</a>
+		</div>
+
+	<div id="niveau1">Contacts</div>
+		<div id="niveau2">
+		<a href="http://groups.google.com/group/pydblite">Communauté</a>
+		<br><a href="contact.html">Mail</a>
+		</div>
+
+	<div id="niveau1">Code</div>
+		<div id="niveau2">
+		<a href="http://sourceforge.net/project/platformdownload.php?group_id=210258">Téléchargement</a>
+		<br><a href="http://pydblite.svn.sourceforge.net/viewvc/pydblite">Parcourir SVN</a>
+		</div>
+	<div id="niveau1">
+		<a href="bench.html">Comparaisons</a>
+		</div>
+	<div id="niveau1">
+		<a href="licence.html">Licence</a>
+		</div>
+	<div id="fill">&nbsp;<br>&nbsp;<br>&nbsp;<br>
+		&nbsp;<br>&nbsp;<br>&nbsp;<br>
+		&nbsp;<br>&nbsp;<br>&nbsp;<br>
+		&nbsp;<br>&nbsp;<br>&nbsp;<br>
+	</div>
+	</td>
+<td class="content">
+<h2>Adaptateur SQLite</h2>
+<p>La seule différence avec le module en pur Python est la syntaxe pour identifier une table et la nécessité de spécifier le type des champs quand on crée une base
+
+<p>Pour rester cohérent avec le vocabulaire SQLite, le module définit deux classes, <code>Database</code> et <code>Table</code>
+
+
+<h3>Database</h3>
+
+<p><b><code>Database(<i>chemin_bdd[,**kw]</i>)</code></b> : <i>chemin_bdd</i> est le chemin de la base de données dans le système de fichiers. Les arguments par mots-clés sont les mêmes que pour la méthode <code>connect()</code> du module Python pour SQLite
+
+<p>Les instances de <code>Database</code> sont des objets similaires à des dictionnaires, où les clés sont les noms des tables et les valeurs sont des instances de la classe <code>Table</code>
+<ul>
+<li><span class="python">db["test"]</span> renvoie l'instance de la classe <code>Table</code> pour la table "test"
+<li><span class="python">db.keys()</span> renvoie les noms de tables
+<li><span class="python">if "test" in db</span> teste si la table "test" existe dans la base de données
+<li><span class="python">del db["test"]</span> supprime la table "test"
+</ul>
+
+<p>Pour créer une nouvelle table :
+<div class="python">table = db.create(<i>nom_table,*champs[,mode]</i>)</div>
+<p>Les <i>champs</i> doivent être des tuples à 2 éléments <i>(nom_champ, type_champ)</i> où <i>type_champ</i> est un type de champ SQLite : <code>INTEGER, REAL, TEXT</code> oo <code>BLOB</code> :
+<div class="python">db.create('test',('nom','TEXT'),('age','INTEGER'),('taille','REAL'))</div>
+
+<p>S'il faut fournir d'autres informations, les mettre dans le deuxième argument, avec la syntaxe SQL propre à SQLite :
+<div class="python">db.create('test',('date','BLOB DEFAULT CURRENT_DATE'))</div>
+
+</ul>
+
+<p>Le mot-clé optionnel <i>mode</i> spécifie ce qu'il faut faire si une table du même nom existe déjà
+<ul>
+<li><span class="python">mode="open"</span> ouvre la table et ignore les définitions de champs
+
+<li><span class="python">mode="override"</span> efface la table existante et en crée une nouvelle avec les définitions de champs
+
+<li>si <i>mode</i> n'est pas spécifié et que la table existe déjà, une exception <CODE>IOError</CODE> est déclenchée
+
+</ul>
+
+
+
+<h3>Table</h3>
+
+Pour l'insertion, la sélection, la mise à jour et la suppression, la syntaxe est la même que pour le module en pur Python. La seule différence est qu'on ne peut pas utiliser la méthode <code>drop_field()</code>, parce que la suppression de champs n'est pas supportée par SQLite
+
+<p>Pour insérer de nombreux enregistrements en une seule fois,
+
+<p><div class="python">table.insert(liste_de_valeurs)</div>
+
+<p>sera beaucoup plus rapide que
+
+<p><div class="python">for valeurs in liste_de_valeurs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;table.insert(valeurs)</div>
+
+<p>La conversion entre les types Python et les types de champs SQLite reproduit le comportement du module Python pour SQLite : les instances de <code>datetime.date</code> et de <code>datetime.datetime</code> sont stockées comme des dates ou des dates-heures au format ISO
+
+<p>Les méthodes de sélection renvoient des dictionnaires, dans lesquels les types SQLite sont convertis en types Python de cette façon :
+<p>
+<table border="1">
+<tr><th>Type SQLite</th><th>Type Python</th></tr>
+<tr><td>NULL</td><td>None</td></tr>
+<tr><td>TEXT</td><td>unicode</td></tr>
+<tr><td>BLOB</td><td>str</td></tr>
+<tr><td>INTEGER</td><td>int</td></tr>
+<tr><td>REAL</td><td>float</td></tr>
+</table>
+
+<p>Si vous voulez que des champs soient renvoyés comme instances de <code>datetime.date</code>, <code>datetime.time</code> ou <code>datetime.datetime</code>, vous devez le spécifier quand vous créez ou ouvrez la table, en utilisant les méthodes <CODE>is_date(<i>nom_champ</i>)</CODE>, <CODE>is_time(<i>nom_champ</i>)</CODE> ou <CODE>is_datetime(<i>nom_champ</i>)</CODE> :
+
+<div class="python">db = Database('test.sqlite')
+<br>table = Table('truc',db)
+<br>table.is_date('anniv')
+</div>
+
+<h3><code>cursor</code> et <code>commit</code></h3>
+
+Les intances de <code>Database</code> et <code>Table</code> ont toutes :
+<ul>
+<li>l'attribut <code>cursor</code>, le curseur de la connection SQLite. On peut donc exécuter des expressions SQL par <div class="python">db.cursor.execute(expr_sql)</div> et récupérer les résultats par <div class="python">resultats = db.cursor.fetchall()</div>
+
+<li>la méthode <code>commit()</code> pour confirmer les changements à la base de données en fin de transaction
+</ul>
+
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>

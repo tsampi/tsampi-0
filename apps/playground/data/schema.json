@@ -1,0 +1,14 @@
+{
+    "type": "object",
+    "properties": {
+        "parent_sha1": {
+            "type": "string",
+            "pattern": "^([a-f0-9]{4}|.{0})$"
+        },
+        "data": {
+            "type": "object"
+        }
+
+    },
+    "required": ["parent_sha1", "data"]
+}

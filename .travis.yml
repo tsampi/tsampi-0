@@ -1,0 +1,21 @@
+sudo: required
+dist: trusty
+
+before_install:
+    - sudo make dependencies
+    - sudo apt-get install figlet
+
+before_script:
+    - make pep8
+
+script:
+    - script -c "make test" out
+    - tail -n -3 out | grep -qvF 'Subprocess' out || exit 1
+
+
+after_failure:
+    - figlet "Fail!"
+
+after_success:
+    - figlet "Good Job"
+

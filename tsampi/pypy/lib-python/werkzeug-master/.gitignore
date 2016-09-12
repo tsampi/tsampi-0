@@ -1,0 +1,17 @@
+MANIFEST
+build
+dist
+*.egg-info
+*.pyc
+*.pyo
+env
+.DS_Store
+.tox
+docs/_build
+bench/a
+bench/b
+.coverage
+coverage_out
+.cache
+.xprocess
+htmlcov

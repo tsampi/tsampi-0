@@ -1,0 +1,13 @@
+commit 3512d98751c3ecaa816f56637360a4321b287857
+Author: Tim Watts <coconutrandom@gmail.com>
+Date:   Tue Mar 22 15:28:14 2016 -0400
+
+    rm a file
+
+diff --git a/file1 b/file1
+deleted file mode 100644
+index e212970..0000000
+--- a/file1
++++ /dev/null
+@@ -1 +0,0 @@
+-file1

@@ -1,0 +1,3 @@
+include LICENCE.txt
+recursive-include docs *
+
